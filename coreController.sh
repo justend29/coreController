@@ -1,4 +1,4 @@
-#!/bin/bash
+ #!/bin/bash
 
 # writes to the online file of each core to turn them on or off
 # November 13, 2018
@@ -8,11 +8,14 @@
 #
 #https://stackoverflow.com/questions/6481005/how-to-obtain-the-number-of-cpus-cores-in-linux-from-the-command-line
 
-available_cores=`nproc --all`
-((available_cores-=1))
-desired_cores=[$1-1]
+available_cores=$((`nproc --all`-1))
+desired_cores=$(($1-1))
 
-for core in `seq 0 $available_cores`; do
+echo available cores $available_cores
+echo desired cores $desired_cores
+
+#loop through cores 1 through max. Skip core 0 as it's write protected and required
+for core in `seq 1 $available_cores`; do
 	echo current iteration $core
 	if [ $core -le $1 ]
 	then
