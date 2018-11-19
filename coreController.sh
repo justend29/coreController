@@ -17,7 +17,7 @@ echo desired cores $desired_cores
 #loop through cores 1 through max. Skip core 0 as it's write protected and required
 for core in `seq 1 $available_cores`; do
 	echo current iteration $core
-	if [ $core -le $1 ]
+	if [ $core -lt $1 ]
 	then
 		echo 1 | sudo tee /sys/devices/system/cpu/cpu$core/online
 	else
